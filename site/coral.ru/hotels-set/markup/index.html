@@ -1,0 +1,78 @@
+<body>
+<link rel="stylesheet" href="/site/coral.ru/hotels-set/css/index.less">
+<div class="code2me-hotels-set" data-component-instance="{{ component_instance }}">
+    {{ #any_filter_present }}
+    <div class="filters-wrap">
+        {{ #groups.length }}
+        <div class="group-filters">
+            <div class="heading region">Выберите {{ choose_region_wording }}</div>
+        {{ /groups.length }}
+            {{ #groups }}
+            <button class="buttonlike white {{ #default }}selected{{ /default }}" data-group="{{ id }}">{{ button_label }}</button>
+            {{ /groups }}
+        {{ #groups.length }}</div>{{ /groups.length }}
+        {{ #months.length }}
+        <div class="month-filters">
+            <div class="heading month">Выберите месяц путешествия</div>
+        {{ /months.length }}
+            {{ #months }}
+            <button class="buttonlike white {{ #default }}selected{{ /default }}" data-year-month="{{ id }}">{{ button_label }}</button>
+            {{ /months }}
+        {{ #months.length }}</div>{{ /months.length }}
+    </div>
+    {{ /any_filter_present }}
+
+    <div class="cards-grid">
+        {{ #hotels }}
+        <div class="card-cell" data-group="{{ group_field_value }}" data-year-month="{{ year_month }}">
+            <!--<div class="pad">-->
+                <div class="visual" style="background-image: url({{{ visualSrc }}});">
+                     
+                </div>
+                <div class="info">
+                    <div class="stars-name-location">
+                        <div is="hotel-stars" class="trait" data-category="{{ category }}">
+                            {{ #stars }}
+                            <span class="star"> </span>
+                            {{ /stars }}
+                        </div>
+                        <h3 class="name">{{ name }}</h3>
+                        <h4 class="location">{{ location.area }}</h4>
+                    </div>
+                    {{ #benefits.length }}
+                    <div class="benefits">
+                        {{ #benefits }}
+                        <div><span>{{{ . }}}</span></div>
+                        {{ /benefits }}
+                    </div>
+                    {{ /benefits.length }}
+                    <div class="terms">
+                        {{ #flight_included }}
+                        <span class="term-badge depart-from">
+                            <span class="icon"></span><span class="label">{{ departure_from }}</span>
+                        </span>
+                        {{ /flight_included }}
+                        <span class="term-badge depart-date">
+                            <span class="icon"></span><span class="label">{{ departure_date }}</span>
+                        </span>
+                        <span class="term-badge accomodation">
+                            <span class="icon">{{ eeProductInfo.night }}</span><span class="label">ночей</span>
+                        </span>
+                        <span class="term-badge meal">
+                            <span class="icon"></span><span class="label">{{ meal.category }}</span>
+                        </span>
+                    </div>
+                    <div class="price-info from rur per-person">{{ price_per_person_formatted }}</div>
+                    <div class="actions">
+                        <a href="{{{ b2cSearchHref }}}" class="buttonlike yellow" target="_blank">Забронировать</a>
+                    </div>
+                </div>
+            <!--</div>-->
+        </div>
+        {{ /hotels }}
+    </div>
+
+
+</div>
+<script type="module" src="/site/coral.ru/hotels-set/js/dev.coffee"></script>
+</body>
