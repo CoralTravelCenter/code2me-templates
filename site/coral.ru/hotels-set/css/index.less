@@ -109,11 +109,11 @@
 		@media screen and (max-width: @narrow-breakpoint) {
 			grid-template-columns: 1fr;
 		}
-		&:not(.open) {
-			.card-cell:nth-child(n+7) {
-				display: none;
-			}
-		}
+		//&:not(.open) {
+		//	.card-cell:nth-child(n+7) {
+		//		display: none;
+		//	}
+		//}
 		.card-cell {
 			.flex-column;
 			align-items: center;
@@ -140,6 +140,7 @@
 					justify-content: space-between;
 					align-items: center;
 					min-height: 7em;
+					margin-bottom: 1.5em;
 					[is="hotel-stars"] {
 						display: flex;
 						justify-content: center;
@@ -185,7 +186,7 @@
 					.flex-column;
 					text-align: left;
 					margin: auto;
-					padding: 1.5em 0;
+					padding-bottom: 1.5em;
 					> * {
 						font-size: (12/14em);
 						display: flex;
@@ -273,7 +274,7 @@
 					}
 				}
 				.price-info {
-					margin: 0.5em auto;
+					margin: 0.75em auto;
 					display: flex;
 					align-items: baseline;
 					justify-content: center;
@@ -291,6 +292,47 @@
 					}
 				}
 
+			}
+			.actions {
+				>button, >a {
+					font-size: (20/14em) !important;
+					font-weight: 700;
+					min-width: 10em;
+				}
+			}
+		}
+	}
+
+	.actions {
+		>button, >a {
+			font-family: inherit;
+			font-size: inherit!important;
+			line-height: inherit;
+			.interactive;
+			outline: none!important;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0 1.5em;
+			height: (48/20em);
+			background: @coral-main-yellow;
+			border-radius: .5em;
+			border: 0;
+			color: white!important;
+			cursor: pointer;
+			.transit(background);
+			&:hover {
+				background: @coral-main-yellow-accent;
+			}
+			&.with-down-arrow {
+				&:after {
+					content: '';
+					width: .75em;
+					height: .75em;
+					background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxOCAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3IDFMOC41NjM2NCA5TDEgMSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==") center no-repeat;
+					background-size: contain;
+					margin-left: 1em;
+				}
 			}
 		}
 	}
