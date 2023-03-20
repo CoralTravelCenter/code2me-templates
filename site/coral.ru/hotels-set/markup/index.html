@@ -27,13 +27,17 @@
         <div class="card-cell" data-group="{{ group_field_value }}" data-year-month="{{ year_month }}">
             <!--<div class="pad">-->
                 <div class="visual" style="background-image: url({{{ visualSrc }}});">
-                     
+                    <div class="badges-grid">
+                        {{ #badges }}
+                        <div class="hotel-badge {{ klass }}">{{{ html }}}</div>
+                        {{ /badges }}
+                    </div>
                 </div>
                 <div class="info">
                     <div class="stars-name-location">
                         <div is="hotel-stars" class="trait" data-category="{{ category }}">
                             {{ #stars }}
-                            <span class="star"> </span>
+                            <span class="star">&nbsp;</span>
                             {{ /stars }}
                         </div>
                         <h3 class="name">{{ name }}</h3>
@@ -71,9 +75,12 @@
         </div>
         {{ /hotels }}
     </div>
+    <div class="actions">
+        <button class="with-down-arrow" data-action="show-all"><span>Показать все (<span class="cards-count">...</span>)</span></button>
+    </div>
 
 
 </div>
-<script type="module" src="/site/coral.ru/hotels-set/js/dev.coffee"></script>
+<!--<script type="module" src="/site/coral.ru/hotels-set/js/dev.coffee"></script>-->
 <script type="module" src="/site/coral.ru/hotels-set/js/index.coffee"></script>
 </body>

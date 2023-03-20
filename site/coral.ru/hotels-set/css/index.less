@@ -1,6 +1,23 @@
 @import "/site/common/css/coral-landing";
 
+.responsive-ruleset(@huge; @large; @mid; @mobile; @narrow) {
+	@huge();
+	@media screen and (max-width: (@wide-breakpoint - 1)) {
+		@large();
+	}
+	@media screen and (max-width: (@mid-breakpoint - 1)) {
+		@mid();
+	}
+	@media screen and (max-width: @mobile-breakpoint) {
+	    @mobile();
+	}
+	@media screen and (max-width: @narrow-breakpoint) {
+	    @narrow();
+	}
+}
+
 .code2me-hotels-set {
+	.bbox();
 	font-family: museosans;
 	.silly-b2c-font-size();
 	.flex-column;
@@ -15,7 +32,7 @@
 	}
 
 	.filters-wrap {
-		font-size: (14/20em);
+		font-size: 14px;
 		display: flex;
 		align-items: flex-start;
 		background-color: white;
@@ -98,7 +115,8 @@
 	}
 
 	.cards-grid {
-		font-size: (14/20em);
+		//font-size: (14/20em);
+		font-size: 14px;
 		margin-top: 1.5em;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -108,24 +126,81 @@
 		}
 		@media screen and (max-width: @narrow-breakpoint) {
 			grid-template-columns: 1fr;
+			font-size: 1.2em;
 		}
-		//&:not(.open) {
-		//	.card-cell:nth-child(n+7) {
-		//		display: none;
-		//	}
-		//}
+		&.open + .actions {
+			display: none;
+		}
+		&.no-match:after {
+			content: 'Нет вариантов. \A Пожалуйста, выберите другие параметры фильтров';
+			white-space: pre;
+			text-align: center;
+			padding: 2em;
+			background: @coral-red-warn;
+			border-radius: 1em;
+			grid-column-end: span 3;
+		}
 		.card-cell {
 			.flex-column;
 			align-items: center;
 			text-align: center;
 			border-radius: 1em;
 			background: white;
+			&:not(.shown) {
+				display: none;
+			}
 			.visual {
 				flex-shrink: 0;
 				.proportional(16/9);
 				width: 100%;
 				border-radius: 1em;
 				background: center / cover no-repeat;
+				.badges-grid {
+					max-width: 100%;
+					width: auto;
+					height: auto;
+					.responsive-ruleset({font-size: 12px;}, {font-size: 11px; }, {font-size: 0.9vw; }, {font-size: 1.3vw;}, {font-size: 2.5vw;});
+					font-weight: 700;
+					line-height: 3em;
+					word-spacing: 0;
+					padding: 0.5em 1em 0.5em 0.5em;
+					text-align: left;
+					.hotel-badge {
+						display: inline-flex;
+						justify-content: center;
+						align-items: center;
+						line-height: 2.5;
+						margin-left: 0.5em;
+						border-radius: 5px;
+						&.sfc {
+							width: 8em;
+							background: white url("data-url:/site/coral.ru/hotels-set/inline-assets/logo-sfc.svg") center / 90% no-repeat;
+						}
+						&.usfc {
+							width: 11.3em;
+							background: white url("data-url:/site/coral.ru/hotels-set/inline-assets/logo-usfc.svg") center / 90% no-repeat;
+						}
+						&.elite, &.eliteservice {
+							background: #5F6062;
+							color: white;
+							padding: 0 1em;
+							&:after {
+								content: 'ELITE SERVICE';
+								font-weight: 500;
+								letter-spacing: .27em;
+								word-spacing: normal;
+							}
+						}
+						&.text-only {
+							padding: 0 1em;
+							letter-spacing: normal;
+							text-transform: uppercase;
+							background-color: fade(black, 50%);
+							color: white;
+							box-shadow: inset 0 0 1px 1px white;
+						}
+					}
+				}
 			}
 			.info {
 				width: 100%;
@@ -145,6 +220,7 @@
 						display: flex;
 						justify-content: center;
 						align-items: center;
+						height: 1.3em;
 						.star {
 							width: 1.5em;
 							height: 100%;
@@ -212,7 +288,7 @@
 						flex: 0 1 auto;
 						display: inline-flex;
 						align-items: center;
-						font-size: 11px;
+						font-size: (11/14em);
 						line-height: 1;
 						margin: 2px;
 						.icon {
@@ -278,7 +354,7 @@
 					display: flex;
 					align-items: baseline;
 					justify-content: center;
-					font-weight: 700;
+					font-weight: 900;
 					font-size: (24/14em);
 					&.from:before {
 						content: 'от ';
@@ -286,9 +362,13 @@
 						font-size: (20/24em);
 					}
 					&:after {
-						content: ' ₽ / чел';
+						content: '/ чел';
 						font-weight: normal;
 						font-size: (20/24em);
+						background: url(data-url:/site/coral.ru/hotels-set/inline-assets/rur.svg) left center / contain no-repeat;
+						margin-left: 0.3em;
+						padding-left: 0.8em;
+						line-height: 0.83;
 					}
 				}
 
@@ -301,6 +381,25 @@
 				}
 			}
 		}
+		& + .actions {
+			display: flex;
+			justify-content: center;
+			padding: 1em;
+			@media screen and (max-width: @narrow-breakpoint) {
+				font-size: 1.5em;
+			}
+			>button {
+				background: transparent;
+				color: black!important;
+				box-shadow: inset 0 0 0 2px currentColor;
+				&:after {
+					filter: invert(1);
+				}
+				&:hover {
+					background: inherit;
+				}
+			}
+		}
 	}
 
 	.actions {
@@ -308,6 +407,7 @@
 			font-family: inherit;
 			font-size: inherit!important;
 			line-height: inherit;
+			text-decoration: none;
 			.interactive;
 			outline: none!important;
 			display: inline-flex;
