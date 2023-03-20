@@ -1,5 +1,3 @@
-import { ASAP } from '/site/common/js/utils.coffee'
-
 initially_visible = 6
 always_visible_max = 9
 
@@ -27,7 +25,7 @@ applyPredicate = ($grid, $cards, $paging_ctl, predicate) ->
     $paging_ctl.find('.cards-count').text matched_total
     $grid.toggleClass 'no-match', $matched.length == 0
 
-ASAP ->
+document.addEventListener 'DOMContentLoaded', ->
     $.fn.isotope = ->
 
     component_instance = '31dcdd88-d242-4ee6-8d76-532166496b06'
@@ -47,3 +45,4 @@ ASAP ->
         applyPredicate $grid, $cards, $pager, predicateWithSelection $filters
 
     applyPredicate $grid, $cards, $pager, predicateWithSelection $filters
+, once: yes
