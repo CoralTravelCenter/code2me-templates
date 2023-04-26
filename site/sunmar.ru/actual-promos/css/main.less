@@ -1,0 +1,18 @@
+@import "/site/common/css/sunmar-landing.less";
+
+section.kv {
+	.hero-visual(@desktop-visual-url: "/site/sunmar.ru/actual-promos/assets/kv-desktop.jpg", @mobile-visual-url: "/site/sunmar.ru/actual-promos/assets/kv-mobile.jpg");
+	color: white;
+	>article {
+		>.contenu {
+			@media screen and (max-width: @mobile-breakpoint) {
+				padding-top: 7vw!important;
+				justify-content: flex-start;
+			}
+		}
+	}
+	h1 {
+		max-width: 12em!important;
+	}
+}
+

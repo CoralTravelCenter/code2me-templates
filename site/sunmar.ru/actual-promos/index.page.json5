@@ -1,0 +1,8 @@
+{
+    env: {
+        cdnAssetsURL: 'https://cdn.sunmar.ru/content/cms/russia/info-actions'
+    },
+    contents: [
+        '/site/sunmar.ru/actual-promos/markup/kv.html',
+    ]
+}
